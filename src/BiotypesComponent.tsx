@@ -198,7 +198,7 @@ export const BiotypesComponent = observer(function BiotypesComponent(props: {
         addedFeature: {
           _id: new ObjectID().toHexString(),
           refSeq: feature.refSeq,
-          min: Number(exonMin) - 1,
+          min: Number(exonMin),
           max: Number(exonMax),
           type: 'CDS',
           strand: feature.strand,

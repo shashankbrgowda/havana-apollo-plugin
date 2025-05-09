@@ -104,7 +104,7 @@
     "tss-react": "^4.8.6",
     "typescript": "^5.3.3"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@mui/icons-material": "^7.0.2",
     "bson-objectid": "^2.0.4",

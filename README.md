@@ -1,6 +1,6 @@
 # havana-apollo-plugin
 
-This plugin provides custom Apollo3 components for Havana.
+This plugin provides custom Havana related components/features for Apollo3.
 - Biotypes Component: Dropdown with ensembl biotypes
 - Havana Save Component: Save button which syncs data from Apollo3 to Havana
 

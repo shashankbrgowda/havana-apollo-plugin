@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { observer } from 'mobx-react'
 import {
   Menu,
@@ -64,6 +64,13 @@ export const BiotypesComponent = observer(function BiotypesComponent(props: {
     AddFeatureChange,
     FeatureAttributeChange,
   } = props
+
+  useEffect(() => {
+    setSelectedItem(null)
+    setOpenSubmenuIndex(null)
+    setSubmenuAnchor(null)
+    setAnchorEl(null)
+  }, [feature])
 
   const { notify } = session as unknown as AbstractSessionModel
   const { changeManager } = session.apolloDataStore

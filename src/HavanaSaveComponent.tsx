@@ -16,7 +16,8 @@ export const HavanaSaveComponent = observer(
         variant="extended"
         onClick={handleHavanaSave}
         color="primary"
-        style={{ width: 100, position: 'fixed', bottom: 20, right: 20 }}
+        style={{ width: 150, position: 'fixed', bottom: 20, right: 20 }}
+        disabled={true}
       >
         <SaveIcon sx={{ mr: 1 }} />
         Save to Havana

@@ -1,68 +1,77 @@
 export interface BiotypeSubtype {
   label: string
-  so_term: string | null
+  so_term?: string
   display_name: string
+  active?: boolean
 }
 export interface Biotype {
   label: string
-  so_term: string | null
+  so_term?: string
   display_name: string
   subtypes: BiotypeSubtype[]
+  active?: boolean
 }
 
 export const biotypes: Biotype[] = [
   {
     label: 'retained_intron',
-    so_term: 'retained_intron',
+    so_term: 'transcript',
     display_name: 'Retained Intron',
     subtypes: [],
+    active: true,
   },
   {
     label: 'transcript',
     so_term: 'transcript',
     display_name: 'Transcript',
     subtypes: [],
+    active: true,
   },
   {
     label: 'coding_type',
-    so_term: null,
     display_name: 'Coding Type',
+    active: true,
     subtypes: [
       {
         label: 'coding',
-        so_term: 'Coding',
+        so_term: 'mRNA',
         display_name: 'Coding',
+        active: true,
       },
       {
         label: 'known_CDS',
-        so_term: 'Known_CDS',
+        so_term: 'mRNA',
         display_name: 'Known_CDS',
+        active: true,
       },
       {
         label: 'novel_CDS',
-        so_term: 'Novel_CDS',
+        so_term: 'mRNA',
         display_name: 'Novel_CDS',
+        active: true,
       },
       {
         label: 'putative_CDS',
-        so_term: 'Putative_CDS',
+        so_term: 'mRNA',
         display_name: 'Putative_CDS',
+        active: true,
       },
       {
         label: 'nonsense_mediated_decay',
-        so_term: 'Nonsense_mediated_decay',
+        so_term: 'mRNA',
         display_name: 'Nonsense_mediated_decay',
+        active: true,
       },
       {
         label: 'non_stop_decay',
-        so_term: 'Non_stop_decay',
+        so_term: 'mRNA',
         display_name: 'Non_stop_decay',
+        active: true,
       },
     ],
   },
   {
     label: 'ensembl_only',
-    so_term: null,
     display_name: 'Ensembl only',
     subtypes: [
       {
@@ -229,7 +238,6 @@ export const biotypes: Biotype[] = [
   },
   {
     label: 'known_ncRNA',
-    so_term: 'Known_ncRNA',
     display_name: 'Known_ncRNA',
     subtypes: [
       {
@@ -286,49 +294,55 @@ export const biotypes: Biotype[] = [
   },
   {
     label: 'non_coding',
-    so_term: 'Non_coding',
     display_name: 'Non_coding',
+    active: true,
     subtypes: [
       {
         label: 'lincRNA',
-        so_term: 'lincRNA',
+        so_term: 'transcript',
         display_name: 'lincRNA',
+        active: true,
       },
       {
         label: 'macro_lncRNA',
-        so_term: 'Macro_lncRNA',
+        so_term: 'transcript',
         display_name: 'Macro_lncRNA',
+        active: true,
       },
       {
         label: 'antisense',
-        so_term: 'Antisense',
+        so_term: 'transcript',
         display_name: 'Antisense',
+        active: true,
       },
       {
         label: 'sense_intronic',
-        so_term: 'Sense_intronic',
+        so_term: 'transcript',
         display_name: 'Sense_intronic',
+        active: true,
       },
       {
         label: 'sense_overlapping',
-        so_term: 'Sense_overlapping',
+        so_term: 'transcript',
         display_name: 'Sense_overlapping',
+        active: true,
       },
       {
         label: "3'_overlapping_ncRNA",
-        so_term: '3_prime_overlapping_ncRNA',
+        so_term: 'transcript',
         display_name: "3'_overlapping_ncRNA",
+        active: true,
       },
       {
         label: 'bidirectional_promoter_lncRNA',
-        so_term: 'Bidirectional_promoter_lncRNA',
+        so_term: 'transcript',
         display_name: 'Bidirectional_promoter_lncRNA',
+        active: true,
       },
     ],
   },
   {
     label: 'other',
-    so_term: null,
     display_name: 'Other',
     subtypes: [
       {
@@ -375,7 +389,6 @@ export const biotypes: Biotype[] = [
   },
   {
     label: 'pseudogene',
-    so_term: 'Pseudogene',
     display_name: 'Pseudogene',
     subtypes: [
       {

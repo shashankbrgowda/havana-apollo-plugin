@@ -107,6 +107,7 @@
   "private": true,
   "dependencies": {
     "@mui/icons-material": "^7.0.2",
+    "bson-objectid": "^2.0.4",
     "tslib": "^2.8.1"
   }
 }

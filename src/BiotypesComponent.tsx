@@ -108,7 +108,7 @@ export const BiotypesComponent = observer(function BiotypesComponent(props: {
   }
 
   let biotype: string | undefined
-  if (feature) {
+  if (feature?.attributes?.get('biotype')) {
     biotype = feature.attributes?.get('biotype')[0]
   }
 
@@ -116,7 +116,7 @@ export const BiotypesComponent = observer(function BiotypesComponent(props: {
     new_biotype: string,
     so_term: string | undefined,
   ) => {
-    if (!so_term || !biotype) {
+    if (!so_term) {
       return
     }
 
@@ -130,6 +130,7 @@ export const BiotypesComponent = observer(function BiotypesComponent(props: {
       type,
       transcriptExonParts,
       attributes,
+      cdsLocations,
     } = feature
 
     const exonParts = (transcriptExonParts as TranscriptParts)
@@ -152,6 +153,7 @@ export const BiotypesComponent = observer(function BiotypesComponent(props: {
       serializedAttributes = {}
     }
     serializedAttributes.biotype = [new_biotype]
+    delete serializedAttributes._id
 
     const featureAttributeChange = new FeatureAttributeChange({
       changedIds: [feature._id],
@@ -191,6 +193,10 @@ export const BiotypesComponent = observer(function BiotypesComponent(props: {
 
     // If the feature type is mRNA then create the CDS using exon boundaries
     if (so_term === 'mRNA') {
+      // If CDS already exists, do not create a new one when the biotype is changed to mRNA type
+      if (cdsLocations?.[0]?.length > 0) {
+        return
+      }
       const change = new AddFeatureChange({
         changedIds: [feature._id],
         typeName: 'AddFeatureChange',

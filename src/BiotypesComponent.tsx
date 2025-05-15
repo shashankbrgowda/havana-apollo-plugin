@@ -7,11 +7,10 @@ import {
   MenuItem,
   ListItemText,
   ListItemIcon,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
   IconButton,
+  ListItem,
+  List,
+  Typography,
 } from '@mui/material'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import ModeEditIcon from '@mui/icons-material/ModeEdit'
@@ -219,69 +218,76 @@ export const BiotypesComponent = observer(function BiotypesComponent(props: {
 
   return (
     <div>
-      <Table
-        size="small"
-        sx={{ fontSize: '0.75rem', '& .MuiTableCell-root': { padding: '4px' } }}
-        style={{ backgroundColor: 'rgb(0 0 0 / 12%)', marginTop: '10px' }}
-      >
-        <TableBody>
-          <TableRow>
-            <TableCell style={{ fontWeight: 'bold', paddingLeft: '10px' }}>
-              Biotype
-            </TableCell>
-            <TableCell>{selectedItem ? selectedItem : biotype}</TableCell>
-            <TableCell style={{ textAlign: 'right' }}>
-              <IconButton ref={buttonRef} onClick={handleMainMenuClick}>
-                <ModeEditIcon />
-              </IconButton>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
+      <List style={{ padding: 0, marginTop: 10 }}>
+        <ListItem
+          alignItems="flex-start"
+          style={{ backgroundColor: 'rgb(0 0 0 / 12%)' }}
+          secondaryAction={
+            <IconButton ref={buttonRef} onClick={handleMainMenuClick}>
+              <ModeEditIcon color="primary" />
+            </IconButton>
+          }
+        >
+          <ListItemText
+            primary={
+              <Typography style={{ fontWeight: 'bold' }} variant="body2">
+                Biotype
+              </Typography>
+            }
+            secondary={
+              <Typography variant="body2" color="textSecondary">
+                {selectedItem ? selectedItem : biotype}
+              </Typography>
+            }
+          />
+        </ListItem>
+      </List>
 
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMainMenuClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      >
-        {biotypes.map((item, index) => (
-          <div key={index}>
-            <MenuItem
-              onClick={event => handleMenuItemClick(event, item, index)}
-              disabled={!item.active}
-            >
-              <ListItemText>{item.display_name}</ListItemText>
-              {item.subtypes.length > 0 && (
-                <ListItemIcon>
-                  <ArrowRightIcon />
-                </ListItemIcon>
-              )}
-            </MenuItem>
-
-            {item.subtypes && openSubmenuIndex === index && (
-              <Menu
-                anchorEl={submenuAnchor}
-                open={true}
-                onClose={() => setOpenSubmenuIndex(null)}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      {anchorEl && (
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleMainMenuClose}
+          // anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+          // transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+        >
+          {biotypes.map((item, index) => (
+            <div key={index}>
+              <MenuItem
+                onClick={event => handleMenuItemClick(event, item, index)}
+                disabled={!item.active}
               >
-                {item.subtypes.map((child: BiotypeSubtype, i: number) => (
-                  <MenuItem
-                    key={i}
-                    onClick={() => handleSubmenuItemClick(child)}
-                    disabled={!item.active}
-                  >
-                    {child.display_name}
-                  </MenuItem>
-                ))}
-              </Menu>
-            )}
-          </div>
-        ))}
-      </Menu>
+                <ListItemText>{item.display_name}</ListItemText>
+                {item.subtypes.length > 0 && (
+                  <ListItemIcon>
+                    <ArrowRightIcon />
+                  </ListItemIcon>
+                )}
+              </MenuItem>
+
+              {item.subtypes && openSubmenuIndex === index && (
+                <Menu
+                  anchorEl={submenuAnchor}
+                  open={true}
+                  onClose={() => setOpenSubmenuIndex(null)}
+                  // anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                  // transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+                >
+                  {item.subtypes.map((child: BiotypeSubtype, i: number) => (
+                    <MenuItem
+                      key={i}
+                      onClick={() => handleSubmenuItemClick(child)}
+                      disabled={!item.active}
+                    >
+                      {child.display_name}
+                    </MenuItem>
+                  ))}
+                </Menu>
+              )}
+            </div>
+          ))}
+        </Menu>
+      )}
     </div>
   )
 })

@@ -4,6 +4,7 @@ import { version } from '../package.json'
 
 import { BiotypesComponent } from './BiotypesComponent'
 import { HavanaSaveComponent } from './HavanaSaveComponent'
+import { HavanaAttributesComponent } from './HavanaAttributesComponent'
 
 export default class HavanaApolloPlugin extends Plugin {
   name = 'HavanaApolloPlugin'
@@ -25,6 +26,16 @@ export default class HavanaApolloPlugin extends Plugin {
       (arg: React.ElementType, props) => {
         if (props.key === 'status') {
           return HavanaSaveComponent
+        }
+        return arg
+      },
+    )
+
+    pluginManager.addToExtensionPoint(
+      'Apollo-HavanaAttributes',
+      (arg: React.ElementType, props) => {
+        if (props.key === 'status') {
+          return HavanaAttributesComponent
         }
         return arg
       },

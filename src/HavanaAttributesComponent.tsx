@@ -163,6 +163,7 @@ export const HavanaAttributesComponent = observer(
       } else {
         serializedAttributes = {}
       }
+      const oldControlledRemark = serializedAttributes.controlled_remarks
       serializedAttributes.controlled_remarks = controlledRemark
       const featureAttributeChange = new FeatureAttributeChange({
         changedIds: [feature._id],
@@ -170,6 +171,14 @@ export const HavanaAttributesComponent = observer(
         assembly: assemblyId,
         featureId: feature._id,
         attributes: serializedAttributes,
+        attributeEdited: {
+          old: {
+            controlled_remarks: oldControlledRemark,
+          },
+          new: {
+            controlled_remarks: controlledRemark,
+          },
+        },
       })
       changeManager
         .submit(featureAttributeChange)
@@ -196,6 +205,7 @@ export const HavanaAttributesComponent = observer(
       } else {
         serializedAttributes = {}
       }
+      const oldRemark = serializedAttributes.remark
       serializedAttributes.remark = [remark]
       const featureAttributeChange = new FeatureAttributeChange({
         changedIds: [feature._id],
@@ -203,6 +213,14 @@ export const HavanaAttributesComponent = observer(
         assembly: assemblyId,
         featureId: feature._id,
         attributes: serializedAttributes,
+        attributeEdited: {
+          old: {
+            remark: oldRemark,
+          },
+          new: {
+            remark: [remark],
+          },
+        },
       })
       changeManager
         .submit(featureAttributeChange)

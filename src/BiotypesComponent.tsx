@@ -151,6 +151,7 @@ export const BiotypesComponent = observer(function BiotypesComponent(props: {
     } else {
       serializedAttributes = {}
     }
+    const oldBiotype = serializedAttributes.biotype
     serializedAttributes.biotype = [new_biotype]
     delete serializedAttributes._id
 
@@ -160,6 +161,14 @@ export const BiotypesComponent = observer(function BiotypesComponent(props: {
       assembly: assemblyId,
       featureId: feature._id,
       attributes: serializedAttributes,
+      attributeEdited: {
+        old: {
+          biotype: oldBiotype,
+        },
+        new: {
+          biotype: [new_biotype],
+        },
+      },
     })
     await changeManager.submit(featureAttributeChange)
 

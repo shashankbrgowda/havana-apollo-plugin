@@ -1,5 +1,5 @@
 {
-  "version": "0.0.3",
+  "version": "0.0.4",
   "name": "havana-apollo-plugin",
   "description": "Havana plugin for Apollo 3",
   "packageManager": "yarn@4.9.1",
